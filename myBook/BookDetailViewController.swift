@@ -12,18 +12,16 @@ class BookDetailViewController: UIViewController {
 
     var book:Book?
     
-    @IBOutlet weak var bookTitle: UINavigationItem!
-    @IBOutlet weak var bookImage: UIImageView!
-    
-    @IBOutlet weak var bookWriterLabel: UILabel!
-    
+
+    @IBOutlet weak var bookCoverImageView: UIImageView!
+
+    @IBOutlet weak var bookWrterLabel: UILabel!
     @IBOutlet weak var bookPublisherLabel: UILabel!
     
-    @IBOutlet weak var bookPrice: UILabel!
+    @IBOutlet weak var bookPriceLabel: UILabel!
     
+    @IBOutlet weak var bookTitle: UINavigationItem!
     @IBOutlet weak var bookDescriptionTextView: UITextView!
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +30,14 @@ class BookDetailViewController: UIViewController {
             return
         }
         
-        self.bookImage.image = newBook.coverImage
+        self.bookCoverImageView.image = newBook.coverImage
         self.bookPublisherLabel.text = newBook.publisher
-        self.bookWriterLabel.text = newBook.writer
-        self.bookPrice.text = String(newBook.price)
+        self.bookWrterLabel.text = newBook.writer
+        
+        if let bookPrice:Int = newBook.price {
+            self.bookPriceLabel.text = String(bookPrice)
+        }
+        
         self.bookDescriptionTextView.text = newBook.description
         self.bookTitle.title = newBook.title
         // Do any additional setup after loading the view.

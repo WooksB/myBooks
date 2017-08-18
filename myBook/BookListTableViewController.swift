@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookListTableViewController: UITableViewController {
+class BookListTableViewController: UITableViewController, AddBookDelegate {
 
     var books:[Book] = Array()
     
@@ -25,10 +25,14 @@ class BookListTableViewController: UITableViewController {
         let book3 = Book(title: "말의 품격 말과 사람과 품격에 대한 생각들" , writer: "이기주", publisher: "황소북스", coverImage: UIImage(named: "say")!, price: 13050,
                          description: "말과 사람과 품격에 대한 이야기『말의 품격』은 《언어의 온도》로 많은 독자의 공감을 얻은 이기주 작가의 에세이집이다. 경청, 공감, 반응, 뒷말, 인향, 소음 등의 24개의 키워드를 통해 말과 사람과 품격에 대한 생각들을 풀어낸다. 저자의 인문학적 소양을 바탕과 감성이 더해져 볼거리와 생각거리를 동시에 전한다. 한 장 한 장 넘길 때마다 자신의 말과 세계관에 대해 끝없는 질문을 던지게 될 것이다.말은 마음을 담아낸다. 말은 마음의 소리이다. 때문에 무심코 던지 한마디에 사람의 품성이 드러난다. 품성이 말하고 품성이 듣는 것이다. 격과 수준을 의미하는 한자‘품(品)’은 입‘구(口)’가 세 개 모여 이루어져있음을 알 수 있다. 말이 쌓이고 쌓여 한 사람의 품격이 된다는 뜻이다. 말을 죽일지 살릴지 신중히 결정해야 한다. 말은 한 사람의 입에서 나오지만 천 사람의 귀로 들어가고 끝내 만 사람의 입으로 옮겨지기 때문이다. ", url: "http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788997092772&orderClick=43d")
         
+        let book4 = Book(title: "iPhone SDK 튜터리얼2", writer: nil, publisher: nil, coverImage: nil, price: nil, description: nil, url: nil)
+        
+  
         
         books.append(book1)
         books.append(book2)
         books.append(book3)
+        books.append(book4)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -57,12 +61,25 @@ class BookListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
+        if let bookCell = cell as? BookTableViewCell {
+            let book = self.books[indexPath.row]
+            
+            let numFormatter:NumberFormatter = NumberFormatter()
+            numFormatter.numberStyle = NumberFormatter.Style.decimal
+            
+            if let price = book.price {
+                let priceStr = numFormatter.string(from: NSNumber(integerLiteral: book.price!))
+                    bookCell.bookPriceLabel.text = priceStr
+            } else {
+                bookCell.bookPriceLabel.text = ""
+            }
+            bookCell.bookTitleLabel.text = book.title
+            bookCell.bookWriterLabel.text = book.writer
 
-        let book = self.books[indexPath.row]
-        // Configure the cell...
-        cell.textLabel?.text = book.title
-        cell.detailTextLabel?.text = book.writer
-        cell.imageView?.image = book.coverImage
+            bookCell.bookImageView.image = book.coverImage
+            return bookCell
+        }
         
         return cell
     }
@@ -108,19 +125,50 @@ class BookListTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as? UITableViewCell
         
-        let vc = segue.destination as? BookDetailViewController
-        guard let seletedCell = cell, let detailVC = vc else {
-            return
-        }
-        
-        if let idx = self.tableView.indexPath(for: seletedCell) {
-            detailVC.book = self.books[idx.row]
+        if segue.identifier == "addvc" {
+            if let addVC = segue.destination as? AddBookViewController {
+                addVC.delegate = self
+            }
+            
+        } else if segue.identifier == "detailvc" {
+            let cell = sender as? UITableViewCell
+            
+            let vc = segue.destination as? BookDetailViewController
+            guard let seletedCell = cell, let detailVC = vc else {
+                return
+            }
+            
+            if let idx = self.tableView.indexPath(for: seletedCell) {
+                detailVC.book = self.books[idx.row]
+            }
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
- 
+    
+    func sendNewBook(book: Book) {
+        self.books.append(book)
+        self.tableView.reloadData()
+    }
+}
 
+class BookTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var bookImageView: UIImageView!
+    @IBOutlet weak var bookTitleLabel: UILabel!
+    @IBOutlet weak var bookWriterLabel: UILabel!
+    @IBOutlet weak var bookPriceLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+    
 }

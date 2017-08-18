@@ -17,6 +17,7 @@
 		EA47A39D1F455A4D00688754 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47A39C1F455A4D00688754 /* Book.swift */; };
 		EA47A39F1F45634200688754 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47A39E1F45634200688754 /* BookDetailViewController.swift */; };
 		EA47A3A11F456E7100688754 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA47A3A01F456E7100688754 /* WebViewController.swift */; };
+		EAF7A5FF1F466C9D00F84755 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7A5FE1F466C9D00F84755 /* AddBookViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		EA47A39C1F455A4D00688754 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		EA47A39E1F45634200688754 /* BookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		EA47A3A01F456E7100688754 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		EAF7A5FE1F466C9D00F84755 /* AddBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				EA47A39C1F455A4D00688754 /* Book.swift */,
 				EA47A39E1F45634200688754 /* BookDetailViewController.swift */,
 				EA47A3A01F456E7100688754 /* WebViewController.swift */,
+				EAF7A5FE1F466C9D00F84755 /* AddBookViewController.swift */,
 			);
 			path = myBook;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA47A3991F4522B400688754 /* LoginViewController.swift in Sources */,
+				EAF7A5FF1F466C9D00F84755 /* AddBookViewController.swift in Sources */,
 				EA47A3891F451E1C00688754 /* ViewController.swift in Sources */,
 				EA47A39F1F45634200688754 /* BookDetailViewController.swift in Sources */,
 				EA47A39B1F45500900688754 /* BookListTableViewController.swift in Sources */,
@@ -321,6 +325,7 @@
 				EA47A3971F451E1C00688754 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
